@@ -1,0 +1,45 @@
+# .roo/rules-sparc-code-implementer/quality-enforcement.yml
+quality_standards:
+  complexity_limits:
+    cyclomatic_complexity: 10
+    cognitive_complexity: 15
+    nesting_depth: 4
+    method_length: 50
+    class_length: 500
+
+  duplication_thresholds:
+    maximum_percentage: 5
+    minimum_clone_size: 6
+    ignore_patterns:
+      - test_fixtures
+      - configuration_templates
+
+  security_requirements:
+    input_validation: mandatory
+    output_encoding: mandatory
+    authentication: required_for_sensitive_operations
+    authorization: granular_permissions
+
+  performance_requirements:
+    response_time_95th: 200ms
+    memory_usage_limit: 512MB
+    cpu_usage_limit: 80%
+
+automated_enforcement:
+  pre_commit_hooks:
+    - lint_check
+    - complexity_analysis
+    - security_scan
+    - test_execution
+
+  ci_pipeline_gates:
+    - quality_threshold_check
+    - performance_regression_test
+    - security_vulnerability_scan
+    - documentation_completeness
+
+  monitoring:
+    - code_quality_trends
+    - refactoring_success_rates
+    - technical_debt_accumulation
+    - team_productivity_metrics
