@@ -47,7 +47,7 @@ Traditional development suffers from:
 
 ```bash
 # Clone the SPARC-ROO framework
-git clone https://github.com/JackSmack1971/SPARC-ROO.git
+git clone https://github.com/your-org/sparc-roo.git my-project
 cd my-project
 
 # Initialize your project
@@ -240,22 +240,54 @@ Connect powerful external tools:
 ```json
 {
   "mcpServers": {
-    "database": {
+    "Context7": {
       "command": "npx",
-      "args": ["@modelcontextprotocol/server-postgres"],
-      "env": {
-        "DATABASE_URL": "${DATABASE_URL}"
-      }
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "alwaysAllow": ["get-library-docs", "resolve-library-id"]
     },
-    "web-search": {
-      "command": "npx", 
-      "args": ["@modelcontextprotocol/server-brave-search"],
+    "desktop-commander": {
+      "command": "npx",
+      "args": ["-y", "@wonderwhy-er/desktop-commander"],
+      "alwaysAllow": [
+        "set_config_value",
+        "get_config",
+        "read_file",
+        "read_multiple_files",
+        "write_file",
+        "list_directory",
+        "move_file",
+        "search_code",
+        "get_file_info",
+        "edit_block",
+        "execute_command",
+        "",
+        "create_directory"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking@0.6.2"],
+      "alwaysAllow": ["sequentialthinking"]
+    },
+    "exa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.exa.ai/mcp?exaApiKey=YOUR_EXA_API_KEY"
+      ]
+    },
+    "perplexity-ask": {
+      "command": "npx",
+      "args": ["-y", "server-perplexity-ask"],
       "env": {
-        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
-      }
+        "PERPLEXITY_API_KEY": "YOUR_PERPLEXITY_API_KEY"
+      },
+      "alwaysAllow": ["perplexity_ask", "perplexity_ask_tool"]
     }
   }
 }
+
 ```
 
 ### Permission Groups
