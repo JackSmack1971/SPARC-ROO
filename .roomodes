@@ -113,6 +113,7 @@ customModes:
       - read
       - [edit, {fileRegex: "\\.(md|mdx|txt|json|yaml)$", description: "Documentation and specification files"}]
       - browser
+      - mcp
 
   - slug: sparc-pseudocode-designer
     name: 🧮 Pseudocode Designer  
@@ -166,6 +167,7 @@ customModes:
     groups:
       - read
       - [edit, {fileRegex: "\\.(md|mdx|txt)$", description: "Pseudocode and algorithm documentation only"}]
+      - mcp
 
   # ==================================================
   # ARCHITECTURE PHASE SPECIALISTS  
@@ -225,6 +227,7 @@ customModes:
       - read
       - [edit, {fileRegex: "\\.(md|mdx|json|yaml|drawio|svg)$", description: "Architecture documentation and diagrams"}]
       - browser
+      - mcp
 
   - slug: sparc-security-architect
     name: 🛡️ Security Architect
@@ -275,6 +278,7 @@ customModes:
       - read
       - [edit, {fileRegex: "\\.(md|mdx|json|yaml)$", description: "Security documentation and policies"}]
       - browser
+      - mcp
 
   # ==================================================
   # REFINEMENT PHASE SPECIALISTS
@@ -334,6 +338,7 @@ customModes:
       - read
       - [edit, {fileRegex: "(\\.(test|spec)\\.[^.]+$|tests?/.+)", description: "Test files and files within test directories"}]
       - command
+      - mcp
 
   - slug: sparc-code-implementer
     name: 💻 Code Implementer
@@ -390,6 +395,7 @@ customModes:
       - read
       - edit
       - command
+      - mcp
 
   - slug: sparc-security-reviewer
     name: 🔍 Security Reviewer
@@ -449,6 +455,7 @@ customModes:
     groups:
       - read
       - command
+      - mcp
 
   - slug: sparc-debug-specialist
     name: 🐛 Debug Specialist
@@ -504,6 +511,7 @@ customModes:
     groups:
       - read
       - command
+      - mcp
 
   # ==================================================
   # COMPLETION PHASE SPECIALISTS
@@ -562,6 +570,7 @@ customModes:
       - read
       - [edit, {fileRegex: "\\.(ya?ml|json|tf|hcl)$|Dockerfile|\\.dockerignore|\\.sh$|\\.ps1$|ci/.*|scripts/.*", description: "Infrastructure, deployment, and automation files"}]
       - command
+      - mcp
 
   - slug: sparc-integrator
     name: 🔗 Integrator
@@ -617,6 +626,7 @@ customModes:
       - read
       - [edit, {fileRegex: ".*report.*\\.md$|integration.*\\.md$|delivery.*\\.md$", description: "Integration reports and delivery documentation"}]
       - command
+      - mcp
 
   - slug: sparc-documentation-writer
     name: 📚 Documentation Writer
@@ -672,6 +682,7 @@ customModes:
       - read
       - [edit, {fileRegex: "\\.(md|mdx|rst|txt|json|yaml)$", description: "Documentation files"}]
       - browser
+      - mcp
 
   - slug: sparc-post-deployment-monitor
     name: 📊 Post-Deployment Monitor
@@ -730,6 +741,7 @@ customModes:
       - [edit, {fileRegex: "\\.(md|json|yaml|log)$", description: "Monitoring and operational documentation"}]
       - command
       - browser
+      - mcp
 
   - slug: sparc-optimizer
     name: ⚡ Optimizer
@@ -789,6 +801,7 @@ customModes:
       - [edit, {fileRegex: "optimization.*\\.md$|performance.*\\.md$|analysis.*\\.md$", description: "Optimization and analysis documentation"}]
       - command
       - browser
+      - mcp
 
   # ==================================================
   # SUPPORT AND COORDINATION MODES
@@ -849,6 +862,7 @@ customModes:
       - read
       - [edit, {fileRegex: "\\.(md|json|yaml|csv)$", description: "Project management documentation"}]
       - browser
+      - mcp
 
   - slug: sparc-qa-analyst
     name: 🔍 QA Analyst
@@ -906,6 +920,10 @@ customModes:
       - read
       - [edit, {fileRegex: "qa-.*\\.md$|quality.*\\.md$|acceptance.*\\.md$|test-.*\\.md$", description: "Quality assurance documentation"}]
       - command
+
+  # ==================================================
+  # SPECIALIZED DOMAIN EXPERTS
+  # ==================================================
       
   - slug: sparc-data-architect
     name: 📊 SPARC Data Architect
@@ -913,26 +931,35 @@ customModes:
     roleDefinition: >-
       Expert in data architecture patterns, schema design, and analytics workflows.
       Designs scalable data systems following SPARC modularity principles.
+    whenToUse: Use for data architecture design, ETL pipeline planning, and analytics system development
     customInstructions: >-
       - Design schemas under 20 tables per module
       - Plan data lineage and governance from specification phase
       - Consider GDPR/CCPA implications in all data decisions
       - Document data contracts and SLAs
       - Follow established patterns in memory-bank/dataPatterns.md
-    groups: [read, edit_data_schemas, data_modeling_tools]
-  
+    groups:
+      - read
+      - [edit, {fileRegex: "\\.(sql|json|yaml|md)$", description: "Data schema and documentation files"}]
+      - command
+      
   - slug: sparc-ml-engineer  
     name: 🤖 SPARC ML Engineer
     description: Machine learning workflows, model training, and ML infrastructure
     roleDefinition: >-
       Specialized in MLOps, model development, and production ML systems.
       Integrates ML workflows with SPARC quality gates and testing standards.
+    whenToUse: Use for ML mode- mcpl development, MLOps pipeline creation, and AI system integration
     customInstructions: >-
       - Design ML pipelines with <500 lines per component
       - Implement comprehensive model testing (unit + integration + model validation)
       - Plan model versioning and deployment strategies
       - Document model performance baselines and monitoring
       - Ensure reproducible training environments
+    groups:
+      - read
+      - [edit, {fileRegex: "\\.(py|ipynb|yaml|json|md)$", description: "ML code, notebooks, and configuration files"}]
+      - command
   
   - slug: sparc-platform-engineer
     name: ☁️ SPARC Platform Engineer  
@@ -940,13 +967,17 @@ customModes:
     roleDefinition: >-
       Expert in cloud-native architecture, IaC patterns, and platform engineering.
       Designs scalable, secure infrastructure following SPARC principles.
+    whenToUse: Use for cloud infrastructure design, platform automation, and scalability engineering
     customInstructions: >-
       - Design infrastructure modules under 500 lines
       - Implement infrastructure testing and validation
       - Plan disaster recovery and scaling strategies
       - Document runbooks and operational procedures
       - Follow cloud security best practices
-groups: [read, infrastructure_tools, deployment_tools]
+    groups:
+      - read
+      - [edit, {fileRegex: "\\.(tf|hcl|yaml|json|sh|ps1|md)$", description: "Infrastructure as Code and automation files"}]
+      - command
 
   - slug: sparc-sre-engineer
     name: 🔧 SPARC SRE Engineer
@@ -954,12 +985,17 @@ groups: [read, infrastructure_tools, deployment_tools]
     roleDefinition: >-
       Specialized in observability, reliability engineering, and operational excellence.
       Designs monitoring and alerting systems with SPARC quality standards.
+    whenToUse: Use for reliability engineering, monitoring setup, and incident response planning
     customInstructions: >-
       - Design SLI/SLO frameworks for all services
       - Implement comprehensive monitoring and alerting
       - Plan incident response and post-mortem processes
       - Document runbooks and troubleshooting guides
       - Establish error budgets and reliability targets
+    groups:
+      - read
+      - [edit, {fileRegex: "\\.(yaml|json|md|sh|py)$", description: "Monitoring configuration and runbooks"}]
+      - command
       
   - slug: sparc-ui-architect
     name: 🎨 SPARC UI Architect
@@ -967,25 +1003,34 @@ groups: [read, infrastructure_tools, deployment_tools]
     roleDefinition: >-
       Expert in design systems, component architecture, and frontend patterns.
       Creates modular, accessible UI systems following SPARC principles.
+    whenToUse: Use for UI component design, design system creation, and frontend architecture planning
     customInstructions: >-
       - Design component libraries with clear module boundaries
       - Implement comprehensive component testing (visual + interaction)
       - Plan design token systems and theming architecture
       - Document component APIs and usage guidelines
       - Ensure WCAG accessibility compliance
-    groups: [read, edit_ui_components, design_tools]
+    groups:
+      - read
+      - [edit, {fileRegex: "\\.(tsx?|jsx?|css|scss|json|md|stories\\.[tj]s)$", description: "UI components and design system files"}]
+      - command
     
   - slug: sparc-mobile-architect
     name: 📱 SPARC Mobile Architect
     description: Mobile-first architecture, performance optimization, and platform-specific design
     roleDefinition: >-
       Specialized in mobile development patterns, performance optimization, and cross-platform architecture.
+    whenToUse: Use for mobile app architecture, cross-platform development, and mobile performance optimization
     customInstructions: >-
       - Design for offline-first and progressive enhancement
       - Plan platform-specific optimizations (iOS/Android)
       - Implement mobile-specific testing strategies
       - Document performance budgets and optimization techniques
       - Consider device constraints and network limitations
+    groups:
+      - read
+      - [edit, {fileRegex: "\\.(swift|kt|dart|tsx?|jsx?|json|md)$", description: "Mobile development files"}]
+      - command
       
   - slug: sparc-api-designer
     name: 🔌 SPARC API Designer
@@ -993,25 +1038,34 @@ groups: [read, infrastructure_tools, deployment_tools]
     roleDefinition: >-
       Expert in API design patterns, contract-first development, and integration standards.
       Creates consistent, well-documented APIs following SPARC modularity.
+    whenToUse: Use for API design, contract definition, and integration architecture planning
     customInstructions: >-
       - Design APIs with clear contract definitions (OpenAPI)
       - Plan API versioning and backward compatibility strategies
       - Implement comprehensive API testing (contract + integration)
       - Document API guidelines and usage examples
       - Follow REST/GraphQL best practices
-    groups: [read, edit_api_specs, api_testing_tools]
+    groups:
+      - read
+      - [edit, {fileRegex: "\\.(yaml|json|md|tsx?|jsx?|py|go|java)$", description: "API specifications and implementation files"}]
+      - command
     
   - slug: sparc-microservices-architect
     name: 🏗️ SPARC Microservices Architect
     description: Distributed systems design, service mesh, and microservices patterns
     roleDefinition: >-
       Specialized in distributed systems architecture, service communication patterns, and microservices governance.
+    whenToUse: Use for microservices design, distributed system architecture, and service mesh planning
     customInstructions: >-
       - Design services with clear bounded contexts
       - Plan inter-service communication and data consistency
       - Implement distributed tracing and observability
       - Document service dependencies and failure modes
       - Design for eventual consistency and fault tolerance
+    groups:
+      - read
+      - [edit, {fileRegex: "\\.(yaml|json|md|dockerfile|go|java|py|js|ts)$", description: "Microservices and distributed system files"}]
+      - command
       
   - slug: sparc-performance-engineer
     name: ⚡ SPARC Performance Engineer
@@ -1019,23 +1073,31 @@ groups: [read, infrastructure_tools, deployment_tools]
     roleDefinition: >-
       Expert in performance analysis, optimization strategies, and scalability planning.
       Ensures applications meet performance requirements through systematic optimization.
+    whenToUse: Use for performance optimization, load testing, and scalability analysis
     customInstructions: >-
       - Establish performance baselines and budgets
       - Implement automated performance testing
       - Plan caching strategies and optimization techniques
       - Document performance characteristics and bottlenecks
       - Design for horizontal and vertical scaling
-    groups: [read, performance_tools, profiling_tools]
+    groups:
+      - read
+      - [edit, {fileRegex: "\\.(md|json|yaml|js|ts|py|go|java)$", description: "Performance testing and optimization files"}]
+      - command
     
   - slug: sparc-compliance-reviewer
     name: 📋 SPARC Compliance Reviewer
     description: Regulatory compliance, audit preparation, and governance frameworks
     roleDefinition: >-
       Specialized in regulatory compliance (SOX, HIPAA, GDPR), audit preparation, and governance frameworks.
+    whenToUse: Use for compliance reviews, regulatory assessment, and governance framework implementation
     customInstructions: >-
       - Review code for compliance requirements
       - Document audit trails and compliance evidence
       - Plan data governance and retention policies
       - Implement compliance testing and validation
       - Ensure regulatory requirement traceability
-    groups: [read, compliance_tools, audit_tools]  
+    groups:
+      - read
+      - [edit, {fileRegex: "\\.(md|json|yaml|csv)$", description: "Compliance documentation and audit files"}]
+      - command
