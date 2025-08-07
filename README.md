@@ -47,7 +47,7 @@ Traditional development suffers from:
 
 ```bash
 # Clone the SPARC-ROO framework
-git clone https://github.com/your-org/sparc-roo.git my-project
+git clone https://github.com/JackSmack1971/SPARC-ROO.git
 cd my-project
 
 # Initialize your project
